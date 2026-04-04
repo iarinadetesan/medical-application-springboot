@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/doctor-requests/create").permitAll() // POST submit
                         .requestMatchers("/api/doctor-requests/**").hasRole("ADMIN")
                         .requestMatchers("/api/patient-register/**").permitAll()
+                        .requestMatchers("/api/mail/**").permitAll()
                         .requestMatchers("/api/enrollments/**").authenticated()
 
 

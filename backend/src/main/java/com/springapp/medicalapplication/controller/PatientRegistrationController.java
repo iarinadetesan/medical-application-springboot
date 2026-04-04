@@ -27,7 +27,7 @@ public class PatientRegistrationController {
     public ResponseEntity<?> registerPatient(@RequestBody RegisterPatientRequest req) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(service.registerPatient(req)); // ✅ corect: pe instanță
+                    .body(service.registerPatient(req));
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -20,7 +20,10 @@ public class EnrollmentController {
     public EnrollmentController(EnrollmentService service) {
         this.service = service;
     }
-
+    @GetMapping("/test")
+    public String test() {
+        return "ENROLLMENT CONTROLLER OK";
+    }
     // PATIENT
     @PostMapping
     public ResponseEntity<?> create(Authentication auth, @RequestBody EnrollmentCreateRequestDTO req) {

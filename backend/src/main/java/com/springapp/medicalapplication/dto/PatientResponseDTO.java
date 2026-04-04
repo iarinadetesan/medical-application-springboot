@@ -18,5 +18,5 @@ public class PatientResponseDTO {
     public String phone;
     public String address;
 
-    public Long familyDoctorId; // doar id, ca să evităm loop
+    public Long familyDoctorId; // doar id, ca să evitam loop
 }

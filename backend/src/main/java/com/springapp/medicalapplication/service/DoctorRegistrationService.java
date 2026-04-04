@@ -1,17 +1,21 @@
 package com.springapp.medicalapplication.service;
-
+import com.springapp.medicalapplication.service.EmailService;
 import com.springapp.medicalapplication.dto.*;
 import com.springapp.medicalapplication.model.*;
 import com.springapp.medicalapplication.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class DoctorRegistrationService {
+    @Autowired
+    private EmailService emailService;
 
     private final DoctorRegistrationRequestRepository reqRepo;
     private final UserRepository userRepo;
@@ -51,7 +55,19 @@ public class DoctorRegistrationService {
         r.setCabinetAddress(req.cabinetAddress);
         r.setStatus(RequestStatus.PENDING);
 
+
+       emailService.send(
+                "aplicatie.medicala.info@gmail.com",
+                "Cerere nouă de înregistrare medic",
+                "A fost creată o cerere nouă pentru medic: " + r.getFirstName() + " " + r.getLastName()
+                        + "\nEmail: " + r.getEmail()
+                        + "\nLicense: " + r.getLicenseNumber()
+        );
+
         return toDto(reqRepo.save(r));
+
+        
+
     }
 
     public List<DoctorRegistrationResponseDTO> getByStatus(RequestStatus status) {
@@ -91,6 +107,14 @@ public class DoctorRegistrationService {
         r.setStatus(RequestStatus.APPROVED);
         r.setReviewedAt(LocalDateTime.now());
         r.setReviewReason(reason);
+
+        emailService.send(
+                r.getEmail(),
+                "Cererea ta de cont a fost aprobată",
+                "Salut, " + r.getFirstName() + "!\n\nCererea ta a fost aprobată."
+                        + "\nTe poți autentifica folosind username: " + r.getUsername()
+        );
+
         return toDto(reqRepo.save(r));
     }
 
@@ -105,6 +129,14 @@ public class DoctorRegistrationService {
         r.setStatus(RequestStatus.REJECTED);
         r.setReviewedAt(LocalDateTime.now());
         r.setReviewReason(reason);
+
+        emailService.send(
+                r.getEmail(),
+                "Cererea ta de cont a fost respinsă",
+                "Salut, " + r.getFirstName() + "!\n\nCererea ta a fost respinsă."
+                        + "\nMotiv: " + r.getReviewReason()
+                        + "\nDaca crezi ca am facut o greseala, nu ezita sa ne contactezi.\n"
+        );
         return toDto(reqRepo.save(r));
     }
 

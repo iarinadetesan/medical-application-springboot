@@ -4,6 +4,7 @@ import com.springapp.medicalapplication.dto.EnrollmentCreateRequestDTO;
 import com.springapp.medicalapplication.dto.EnrollmentResponseDTO;
 import com.springapp.medicalapplication.model.*;
 import com.springapp.medicalapplication.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Service
 public class EnrollmentService {
+
+    @Autowired
+    private EmailService emailService;
 
     private final EnrollmentRequestRepository enrollRepo;
     private final PatientRepository patientRepo;
@@ -36,18 +40,27 @@ public class EnrollmentService {
         Patient patient = patientRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil pacient inexistent"));
         Doctor doctor = doctorRepo.findById(req.doctorId).orElseThrow(() -> new RuntimeException("Doctor inexistent"));
 
+
         // nu permitem duplicate PENDING
         enrollRepo.findByPatientIdAndDoctorId(patient.getId(), doctor.getId()).ifPresent(existing -> {
             if (existing.getStatus() == RequestStatus.PENDING) {
                 throw new RuntimeException("Există deja o cerere PENDING către acest medic.");
             }
         });
+        if (patient.getFamilyDoctor() != null) {
+            throw new RuntimeException("Exista deja un medic de familie pentru acest pacient.");
+        }
 
         EnrollmentRequest er = new EnrollmentRequest();
         er.setPatient(patient);
         er.setDoctor(doctor);
         er.setStatus(RequestStatus.PENDING);
-        // message optional: dacă vrei, mai adaugi câmp în entity
+        emailService.send(
+                doctor.getUser().getEmail(),
+                "Cerere nouă de înscriere",
+                "Ai o cerere nouă de înscriere de la pacientul: " + patient.getFullName()
+                        + "\nDomiciliu: " + patient.getAddress()
+        );
 
         return toDto(enrollRepo.save(er));
     }
@@ -88,6 +101,14 @@ public class EnrollmentService {
         er.setStatus(RequestStatus.APPROVED);
         er.setReviewedAt(LocalDateTime.now());
         er.setReviewReason(reason);
+
+        emailService.send(
+                patient.getUser().getEmail(),
+                "Actualizare cerere înscriere",
+                "Cererea ta de înscriere a fost " + er.getStatus()
+                        + "\nMedic: " + doctor.getFirstName() + " " + doctor.getLastName()
+        );
+
         return toDto(enrollRepo.save(er));
     }
 
@@ -104,6 +125,13 @@ public class EnrollmentService {
         er.setStatus(RequestStatus.REJECTED);
         er.setReviewedAt(LocalDateTime.now());
         er.setReviewReason(reason);
+        emailService.send(
+                er.getPatient().getUser().getEmail(),
+                "Actualizare cerere înscriere",
+                "Cererea ta de înscriere a fost " + er.getStatus()
+                        + "\nMotiv: " + er.getReviewReason()
+        );
+
         return toDto(enrollRepo.save(er));
     }
 
