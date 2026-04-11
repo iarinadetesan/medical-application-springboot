@@ -10,8 +10,11 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavigationSidebar from '../components/NavigationSidebar'
 import ChatPanel from '../components/ChatPanel'
 import ReportContainer from '../components/ReportContainer';
-import '../styles/GeneralDashboard.css'
 
+import '../styles/GeneralDashboard.css'
+import PatientConsultationsContainer from '../components/patient-specific/PatientConsultationsContainer';
+import PatientPrescriptionsContainer from '../components/patient-specific/PatientPrescriptionsContainer';
+import PatientReferralsContainer from '../components/patient-specific/PatientReferralsContainer';
 
 function PatientDashboard() {
 
@@ -104,10 +107,10 @@ function PatientDashboard() {
         <div className="main d-flex flex-column flex-md-row flex-grow-1">
             
               <div className="report-section d-flex flex-column flex-md-row">
-            <ReportContainer/>
-            <ReportContainer/>
-            <ReportContainer/>
-            <ReportContainer/>
+            <PatientConsultationsContainer objects={dashboard.recentConsultations}/>
+            <PatientPrescriptionsContainer objects={dashboard.prescriptions}/>
+            <PatientReferralsContainer objects={dashboard.referrals}/>
+            
         </div>
               
 <ChatPanel/>
