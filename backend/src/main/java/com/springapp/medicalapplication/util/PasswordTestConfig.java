@@ -1,7 +1,7 @@
 package com.springapp.medicalapplication.util;
 
-import com.springapp.medicalapplication.model.User;
-import com.springapp.medicalapplication.repository.UserRepository;
+import com.springapp.medicalapplication.user.User;
+import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

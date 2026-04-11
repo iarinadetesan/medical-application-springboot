@@ -1,19 +1,49 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import DoctorDashboard from "./pages/DoctorDashboard";
-import PatientDashboard from "./pages/PatientDashboard";
-//import DoctorDashboard from "./pages/DoctorDashboard";
-//import PatientDashboard from "./pages/PatientDashboard";
+import PatientDashboard from "./pages/PatientDashboard2";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
+import DashboardLayout from "./layouts/DashboardLayout";
+import GeneralDashboard from "./layouts/GeneralDashboard";
+
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        <Route path="/doctor" element={<DoctorDashboard />} />
-        <Route path="/patient" element={<PatientDashboard />} />
+        <Route path="/test" element={<GeneralDashboard />} />
+        <Route path="/layout" element={<DashboardLayout />} />
+        <Route
+          path="/doctor"
+          element={
+            <ProtectedRoute allowedRole="DOCTOR">
+              <DoctorDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/patient"
+          element={
+            <ProtectedRoute allowedRole="PATIENT">
+              <PatientDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRole="ADMIN">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
+    
   );
 }
 

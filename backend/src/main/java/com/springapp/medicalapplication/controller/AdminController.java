@@ -2,7 +2,12 @@ package com.springapp.medicalapplication.controller;
 
 
 
-import com.springapp.medicalapplication.repository.*;
+import com.springapp.medicalapplication.consultation.ConsultationRepository;
+import com.springapp.medicalapplication.doctor.DoctorRepository;
+import com.springapp.medicalapplication.patient.PatientRepository;
+import com.springapp.medicalapplication.prescription.PrescriptionRepository;
+import com.springapp.medicalapplication.referral.ReferralRepository;
+import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,8 +1,6 @@
 package com.springapp.medicalapplication.util;
 
-import com.springapp.medicalapplication.model.Role;
-import com.springapp.medicalapplication.model.User;
-import com.springapp.medicalapplication.repository.UserRepository;
+import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

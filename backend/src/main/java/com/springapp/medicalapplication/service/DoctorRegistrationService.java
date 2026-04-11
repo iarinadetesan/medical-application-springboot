@@ -1,13 +1,17 @@
 package com.springapp.medicalapplication.service;
-import com.springapp.medicalapplication.service.EmailService;
+import com.springapp.medicalapplication.doctor.Doctor;
+import com.springapp.medicalapplication.doctor.DoctorRepository;
 import com.springapp.medicalapplication.dto.*;
 import com.springapp.medicalapplication.model.*;
+import com.springapp.medicalapplication.notification.EmailService;
 import com.springapp.medicalapplication.repository.*;
+import com.springapp.medicalapplication.user.Role;
+import com.springapp.medicalapplication.user.User;
+import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.function.ServerResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -112,7 +116,7 @@ public class DoctorRegistrationService {
                 r.getEmail(),
                 "Cererea ta de cont a fost aprobată",
                 "Salut, " + r.getFirstName() + "!\n\nCererea ta a fost aprobată."
-                        + "\nTe poți autentifica folosind username: " + r.getUsername()
+                        + "\nTe poți autentifica folosind email: " + r.getUsername()
         );
 
         return toDto(reqRepo.save(r));

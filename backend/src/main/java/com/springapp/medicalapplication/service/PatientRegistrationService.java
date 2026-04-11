@@ -1,12 +1,12 @@
 package com.springapp.medicalapplication.service;
 
-import com.springapp.medicalapplication.dto.LoginResponse;
+import com.springapp.medicalapplication.auth.dto.LoginResponse;
 import com.springapp.medicalapplication.dto.RegisterPatientRequest;
-import com.springapp.medicalapplication.model.Patient;
-import com.springapp.medicalapplication.model.Role;
-import com.springapp.medicalapplication.model.User;
-import com.springapp.medicalapplication.repository.PatientRepository;
-import com.springapp.medicalapplication.repository.UserRepository;
+import com.springapp.medicalapplication.patient.Patient;
+import com.springapp.medicalapplication.user.Role;
+import com.springapp.medicalapplication.user.User;
+import com.springapp.medicalapplication.patient.PatientRepository;
+import com.springapp.medicalapplication.user.UserRepository;
 import com.springapp.medicalapplication.security.JwtTokenProvider;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

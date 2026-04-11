@@ -1,5 +1,7 @@
 package com.springapp.medicalapplication.model;
 
+import com.springapp.medicalapplication.doctor.Doctor;
+import com.springapp.medicalapplication.patient.Patient;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 

@@ -1,8 +1,8 @@
-// ==================== CustomUserDetailsService.java ====================
+
 package com.springapp.medicalapplication.security;
 
-import com.springapp.medicalapplication.model.User;
-import com.springapp.medicalapplication.repository.UserRepository;
+import com.springapp.medicalapplication.user.User;
+import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,13 +23,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("🔍 CustomUserDetailsService - Loading user: " + username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println("🔍 CustomUserDetailsService - Loading user: " + email);
 
-        User user = userRepository.findByUsername(username)
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> {
-                    System.out.println("❌ User not found in loadUserByUsername: " + username);
-                    return new UsernameNotFoundException("User not found: " + username);
+                    System.out.println("❌ User not found in loadUserByUsername: " + email);
+                    return new UsernameNotFoundException("User not found: " + email);
                 });
 
         System.out.println("✅ User loaded: " + user.getUsername());
@@ -43,14 +43,11 @@ public class CustomUserDetailsService implements UserDetailsService {
         System.out.println("🔑 Authorities: " + authorities);
 
         return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
+                user.getEmail(),
                 user.getPassword(),
                 authorities
         );
     }
 
-    public User loadUserEntityByUsername(String username) {
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
-    }
+
 }
