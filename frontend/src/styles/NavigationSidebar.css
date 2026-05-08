@@ -1,10 +1,10 @@
 
 .navcontainer {
     /*height: calc(100vh - 70px);*/
-    height: 100vh;
-    width: 15%;
+    height: 100%;
+    width: 20%;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: hidden;
     overflow-x: hidden;
     transition: all 0.5s ease-in-out;
     
@@ -14,10 +14,16 @@
     display: none;
 }
 
-.navclose {
-    width: 6%;
+.sidebar-navclose {
+    width: 7%;
 }
-.nav {
+.sidebar-navclose .sidebar-nav-text {
+opacity: 0;
+  max-width: 0;
+  transform: translateX(-8px);
+    /** display: none;*/
+}
+.sidebar-nav {
     height: 100%;
     width: 90%;
     background-color: var(--background-color2);
@@ -26,20 +32,48 @@
     /*left: 00;*/
     box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
     padding: 30px 0 20px 10px;
+    box-sizing: border-box;
 }
+
+.sidebar-nav-option h3 {
+  font-size: 100%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sidebar-nav-icon {
+  font-size: 26px ;
+  min-width: 26px;
+}
+
+.sidebar-nav-text {
+  
+  opacity: 1;
+  
+  overflow: hidden;
+  white-space: nowrap;
+  transform: translateX(0);
+  transition: opacity 0.25s ease, max-width 0.35s ease, transform 0.25s ease;
+}
+
 @media (max-width: 600px) {
-  .nav {
+  .sidebar-nav {
     flex-direction: column;
   }
 }
 
-.nav-option {
-    width: 250px;
-    height: 60px;
+.sidebar-nav-option {
+   /* width: 250px;
+    height: 60px;*/
+    width: 100%;
+    height: 10vh;
     display: flex;
     align-items: center;
     padding: 0 30px 0 20px;
@@ -47,26 +81,26 @@
     transition: all 0.1s ease-in-out;
 }
 
-.nav-option:hover {
+.sidebar-nav-option:hover {
     border-left: 5px solid #a2a2a2;
     background-color: #dadada;
     cursor: pointer;
 }
 
-.nav-img {
+.sidebar-nav-img {
     height: 50%;
     width: 16%;
     
 }
 
-.nav-upper-options {
+.sidebar-nav-upper-options {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2%;
-    border-bottom: 2px solid rgba(0, 20, 151, 0.59);
+   /* border-bottom: 2px solid rgba(0, 20, 151, 0.59);*/
 }
-.nav-lower-options {
+.sidebar-nav-lower-options {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -74,7 +108,7 @@
 }
 
 .option1 {
-    border-left: 5px solid #010058af;
+   border-left: 5px solid #010058af;
     background-color: var(--Border-color);
     color: white;
     cursor: pointer;
@@ -85,6 +119,6 @@
     background-color: var(--Border-color);
 }
 
-.nav-option h3 {
+.sidebar-nav-option h3 {
         font-size: 100%;
     }

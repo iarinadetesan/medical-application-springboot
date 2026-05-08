@@ -1,5 +1,6 @@
 package com.springapp.medicalapplication.consultation.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ConsultationResponseDTO {
@@ -8,12 +9,12 @@ public class ConsultationResponseDTO {
     public String patientName;
     public Long doctorId;
     public String doctorName;
-    public LocalDateTime consultationDate;
+    public LocalDate consultationDate;
     public String diagnosis;
     public String notes;
     public LocalDateTime createdAt;
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return consultationDate;
     }
 }

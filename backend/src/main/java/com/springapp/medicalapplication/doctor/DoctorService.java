@@ -4,6 +4,7 @@ import com.springapp.medicalapplication.doctor.dto.DoctorMapper;
 import com.springapp.medicalapplication.doctor.dto.DoctorRequestDTO;
 import com.springapp.medicalapplication.doctor.dto.DoctorResponseDTO;
 import com.springapp.medicalapplication.patient.PatientRepository;
+import com.springapp.medicalapplication.patient.dto.PatientMapper;
 import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,12 @@ public class DoctorService {
 
     private final DoctorRepository doctorRepository;
     private final UserRepository userRepository;
-    private final PatientRepository patientRepository;
+   // private final PatientRepository patientRepository;
 
-    public DoctorService(PatientRepository patientRepository,
+    public DoctorService(
                           UserRepository userRepository,
                           DoctorRepository doctorRepository) {
-        this.patientRepository = patientRepository;
+
         this.userRepository = userRepository;
         this.doctorRepository = doctorRepository;
     }
@@ -34,6 +35,12 @@ public class DoctorService {
 
     public Optional<DoctorResponseDTO> getDoctorByUserId(Long userId) {
         return doctorRepository.findByUserId(userId).map(DoctorMapper::toDto);
+    }
+    //face un join intre tabelul de useri si tabelul de medici ca sa gaseasca medicul cautat dupa email
+    public Optional<DoctorResponseDTO> getDoctorByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .flatMap(user -> doctorRepository.findByUserId(user.getId()))
+                .map(DoctorMapper::toDto);
     }
 
     /** DE ADAUGAT: functie in doctorRepository care sa returneze toti pacientii doctorului;

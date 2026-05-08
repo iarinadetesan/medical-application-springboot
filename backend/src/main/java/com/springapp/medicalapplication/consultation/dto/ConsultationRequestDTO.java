@@ -1,11 +1,11 @@
 package com.springapp.medicalapplication.consultation.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class ConsultationRequestDTO {
     public Long patientId;
     public Long doctorId;
-    public LocalDateTime consultationDate;
+    public LocalDate consultationDate;
     public String diagnosis;
     public String notes;
 }

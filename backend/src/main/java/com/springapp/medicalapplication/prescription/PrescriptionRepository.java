@@ -19,4 +19,9 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
     List<Prescription> findByStatus(PrescriptionStatus status);
 
     List<Prescription> findByExpiryDateBefore(LocalDate date);
+
+    List<Prescription> findByStatusAndExpiryDateBefore(
+            PrescriptionStatus status,
+            LocalDate date
+    );
 }

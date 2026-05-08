@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 
 import "../../styles/ReportContainerTable.css"
+import { getStatusBadgeVariant } from '../../assets/utils/StatusBadgeUtils';
 export default function PatientReferralsContainer({objects}) {
 
 
@@ -44,7 +45,7 @@ export default function PatientReferralsContainer({objects}) {
                     {referral.reason}
                   </td>
                   <td className="t-op-nextlvl">{referral.expiryDate.substring(0,10)}</td>
-                  <td className="t-op-nextlvl"> <Badge>
+                  <td className="t-op-nextlvl"> <Badge bg={getStatusBadgeVariant(referral.status)}>
                    {referral.status || "Fără status"}</Badge>
                   </td>
                 </tr>

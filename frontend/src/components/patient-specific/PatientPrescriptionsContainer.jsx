@@ -2,6 +2,7 @@
 import Table from 'react-bootstrap/Table';
 import Badge from 'react-bootstrap/Badge';
 import "../../styles/ReportContainerTable.css"
+import { getStatusBadgeVariant } from '../../assets/utils/StatusBadgeUtils';
 export default function PatientPrescriprionsContainer({objects}) {
 
 
@@ -41,7 +42,7 @@ export default function PatientPrescriprionsContainer({objects}) {
                   <td className="t-op-nextlvl">{prescription.instructions}</td>
                   
                   <td className="t-op-nextlvl"> {prescription.expiryDate}</td>
-                  <td className="t-op-nextlvl"><Badge>{prescription.status} </Badge></td>
+                  <td className="t-op-nextlvl"><Badge bg={getStatusBadgeVariant(prescription.status)}>{prescription.status} </Badge></td>
                  
                 </tr>
               ))}

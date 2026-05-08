@@ -4,6 +4,8 @@ package com.springapp.medicalapplication.consultation;
 import com.springapp.medicalapplication.doctor.Doctor;
 import com.springapp.medicalapplication.patient.Patient;
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +25,7 @@ public class Consultation {
     private Doctor doctor;
 
     @Column(name = "consultation_date", nullable = false)
-    private LocalDateTime consultationDate;
+    private LocalDate consultationDate;
 
     @Column(columnDefinition = "TEXT")
     private String diagnosis;
@@ -42,7 +44,7 @@ public class Consultation {
     // Constructors
     public Consultation() {}
 
-    public Consultation(Patient patient, Doctor doctor, LocalDateTime consultationDate) {
+    public Consultation(Patient patient, Doctor doctor, LocalDate consultationDate) {
         this.patient = patient;
         this.doctor = doctor;
         this.consultationDate = consultationDate;
@@ -58,8 +60,8 @@ public class Consultation {
     public Doctor getDoctor() { return doctor; }
     public void setDoctor(Doctor doctor) { this.doctor = doctor; }
 
-    public LocalDateTime getConsultationDate() { return consultationDate; }
-    public void setConsultationDate(LocalDateTime consultationDate) { this.consultationDate = consultationDate; }
+    public LocalDate getConsultationDate() { return consultationDate; }
+    public void setConsultationDate(LocalDate consultationDate) { this.consultationDate = consultationDate; }
 
     public String getDiagnosis() { return diagnosis; }
     public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }

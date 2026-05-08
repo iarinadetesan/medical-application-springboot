@@ -9,7 +9,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavigationSidebar from '../components/NavigationSidebar'
 import ChatPanel from '../components/ChatPanel'
 import ReportContainer from '../components/ReportContainer';
+import AddDocumentModal from '../components/AddDocumentModal';
 import '../styles/GeneralDashboard.css'
+import { Add } from '@mui/icons-material';
 
 
 function GeneralDashboard() {
@@ -52,6 +54,7 @@ function GeneralDashboard() {
         <div className="main d-flex flex-column flex-md-row flex-grow-1">
             
               <div className="report-section d-flex flex-column flex-md-row">
+            <AddDocumentModal/>
             <ReportContainer/>
             <ReportContainer/>
             <ReportContainer/>

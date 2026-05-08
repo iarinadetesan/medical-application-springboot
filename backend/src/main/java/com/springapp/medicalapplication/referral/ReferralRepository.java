@@ -21,4 +21,9 @@ public interface ReferralRepository extends JpaRepository<Referral, Long> {
     List<Referral> findByExpiryDateBefore(LocalDate date);
 
     List<Referral> findBySpecialization(String specialization);
+
+    List<Referral> findByStatusAndExpiryDateBefore(
+            ReferralStatus status,
+            LocalDate date
+    );
 }

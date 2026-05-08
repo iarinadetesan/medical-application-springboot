@@ -1,10 +1,12 @@
 package com.springapp.medicalapplication.doctor;
 
+import com.springapp.medicalapplication.doctor.dashboard.DoctorDashboardService;
 import com.springapp.medicalapplication.doctor.dto.DoctorRequestDTO;
 import com.springapp.medicalapplication.doctor.dto.DoctorResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public class DoctorController {
 
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private DoctorDashboardService doctorDashboardService;
 
     @GetMapping
     public ResponseEntity<List<DoctorResponseDTO>> getAllDoctors() {
@@ -43,6 +47,13 @@ public class DoctorController {
     public ResponseEntity<List<PatientResponseDTO>> getPatientByFamilyDoctorId(@PathVariable Long doctorId) {
         return ResponseEntity.ok(doctorService.get);
     } */
+
+   @GetMapping("/me/dashboard")
+   public ResponseEntity<?> getDoctorDashboard(Authentication authentication) {
+       String email = authentication.getName();
+       return ResponseEntity.ok(doctorDashboardService.getDashboardByEmail(email));
+   }
+
 
     @PostMapping
     public ResponseEntity<?> createDoctor(@RequestBody DoctorRequestDTO doctor) {
