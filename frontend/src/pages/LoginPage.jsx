@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -56,6 +57,7 @@ function LoginPage() {
   };
 
   return (
+    <>
     <div style={{ padding: "20px" }}>
       <h2>Login</h2>
 
@@ -81,6 +83,10 @@ function LoginPage() {
 
       <p>{message}</p>
     </div>
+    <div className="text-center mt-3">
+  Nu ai cont? <Link to="/register/patient">Creează cont de pacient</Link>
+</div>
+    </>
   );
 }
 

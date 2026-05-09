@@ -55,7 +55,7 @@ public class PatientRegistrationService {
         Patient savedPatient = patientRepo.save(p);
 
         String token = tokenProvider.generateToken(
-                savedUser.getUsername(),
+                savedUser.getEmail(),
                 savedUser.getId(),
                 savedUser.getRole().name()
         );
@@ -66,7 +66,7 @@ public class PatientRegistrationService {
                 savedUser.getEmail(),
                 savedUser.getRole().name(),
                 savedUser.getId(),
-                savedPatient.getId()
+                null
         );
     }
 }

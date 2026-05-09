@@ -6,6 +6,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./layouts/DashboardLayout";
 import GeneralDashboard from "./layouts/GeneralDashboard";
+import RegisterPatientPage from "./pages/RegisterPatientPage";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/test" element={<GeneralDashboard />} />
         <Route path="/layout" element={<DashboardLayout />} />
+        <Route path="/register/patient" element={<RegisterPatientPage />} />
         <Route
           path="/doctor"
           element={

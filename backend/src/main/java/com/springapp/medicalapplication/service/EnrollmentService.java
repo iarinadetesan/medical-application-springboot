@@ -41,8 +41,8 @@ public class EnrollmentService {
     }
 
     // PATIENT: create request to a doctor
-    public EnrollmentResponseDTO createRequest(String username, EnrollmentCreateRequestDTO req) {
-        User u = userRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("User inexistent"));
+    public EnrollmentResponseDTO createRequest(String email, EnrollmentCreateRequestDTO req) {
+        User u = userRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User inexistent"));
         if (u.getRole() != Role.PATIENT) throw new RuntimeException("Doar pacientul poate trimite cerere.");
 
         Patient patient = patientRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil pacient inexistent"));
@@ -74,16 +74,16 @@ public class EnrollmentService {
     }
 
     // PATIENT: my requests
-    public List<EnrollmentResponseDTO> getMyRequests(String username) {
-        User u = userRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("User inexistent"));
+    public List<EnrollmentResponseDTO> getMyRequests(String email) {
+        User u = userRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User inexistent"));
         Patient patient = patientRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil pacient inexistent"));
 
         return enrollRepo.findByPatientId(patient.getId()).stream().map(this::toDto).toList();
     }
 
     // DOCTOR: pending requests to me
-    public List<EnrollmentResponseDTO> getPendingForDoctor(String username) {
-        User u = userRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("User inexistent"));
+    public List<EnrollmentResponseDTO> getPendingForDoctor(String email) {
+        User u = userRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User inexistent"));
         if (u.getRole() != Role.DOCTOR) throw new RuntimeException("Doar doctorul poate vedea cereri.");
 
         Doctor doctor = doctorRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil doctor inexistent"));
@@ -91,8 +91,8 @@ public class EnrollmentService {
     }
 
     @Transactional
-    public EnrollmentResponseDTO approve(String username, Long requestId, String reason) {
-        User u = userRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("User inexistent"));
+    public EnrollmentResponseDTO approve(String email, Long requestId, String reason) {
+        User u = userRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User inexistent"));
         if (u.getRole() != Role.DOCTOR) throw new RuntimeException("Doar doctorul poate aproba.");
 
         Doctor doctor = doctorRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil doctor inexistent"));
@@ -120,8 +120,8 @@ public class EnrollmentService {
         return toDto(enrollRepo.save(er));
     }
 
-    public EnrollmentResponseDTO reject(String username, Long requestId, String reason) {
-        User u = userRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("User inexistent"));
+    public EnrollmentResponseDTO reject(String email, Long requestId, String reason) {
+        User u = userRepo.findByEmail(email).orElseThrow(() -> new RuntimeException("User inexistent"));
         if (u.getRole() != Role.DOCTOR) throw new RuntimeException("Doar doctorul poate respinge.");
 
         Doctor doctor = doctorRepo.findByUserId(u.getId()).orElseThrow(() -> new RuntimeException("Profil doctor inexistent"));

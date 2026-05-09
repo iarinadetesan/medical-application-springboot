@@ -2,14 +2,24 @@
 export function getStatusBadgeVariant(status) {
   switch (status) {
     case "ACTIVE":
-    case "PENDING":
       return "success";
+    case "APPROVED":
+      return "success";
+    case "COMPLETED":
+      return "success";
+    case "DISPENSED":
+      return "success";
+    
+      
 
     case "EXPIRED":
       return "danger";
+      case "REJECTED":
+      return "danger";
 
-    case "DISPENSED":
-    case "COMPLETED":
+    
+    
+    case "PENDING":
       return "primary";
 
     default:

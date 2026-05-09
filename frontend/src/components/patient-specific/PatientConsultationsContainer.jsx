@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import "../../styles/ReportContainerTable.css"
 export default function PatientConsultationsContainer({objects}) {
 
+const consultations = objects || [];
 
 
     return(
@@ -24,7 +25,12 @@ export default function PatientConsultationsContainer({objects}) {
               </tr>
             </thead>
             <tbody className="items">
-              {objects.map((consultation) => (
+              {consultations.length === 0 ? (
+  <p className="empty-message">Nu există consultații.</p>
+) : (
+  
+
+              consultations.map((consultation) => (
                 <tr className="item" key={consultation.id}>
                   
                   <td className="t-op-nextlvl">{consultation.consultationDate.substring(0,10) || "-"}</td>
@@ -40,7 +46,7 @@ export default function PatientConsultationsContainer({objects}) {
                     {consultation.notes}
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </Table> 
                     </div>

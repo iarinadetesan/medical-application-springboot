@@ -6,7 +6,7 @@ import "../../styles/ReportContainerTable.css"
 import { getStatusBadgeVariant } from '../../assets/utils/StatusBadgeUtils';
 export default function PatientReferralsContainer({objects}) {
 
-
+const documents = objects || [];
 
     return(
 
@@ -29,7 +29,10 @@ export default function PatientReferralsContainer({objects}) {
               </tr>
             </thead>
             <tbody className="items">
-              {objects.map((referral) => (
+              {documents.length === 0 ? (
+  <p className="empty-message">Nu există trimiteri.</p>
+) : (
+              objects.map((referral) => (
                 <tr className="item" key={referral.id}>
                   
                   
@@ -49,7 +52,7 @@ export default function PatientReferralsContainer({objects}) {
                    {referral.status || "Fără status"}</Badge>
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </Table> 
                     </div>

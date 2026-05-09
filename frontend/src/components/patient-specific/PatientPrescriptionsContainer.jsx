@@ -5,7 +5,7 @@ import "../../styles/ReportContainerTable.css"
 import { getStatusBadgeVariant } from '../../assets/utils/StatusBadgeUtils';
 export default function PatientPrescriprionsContainer({objects}) {
 
-
+const documents = objects || [];
 
     return(
 
@@ -31,7 +31,10 @@ export default function PatientPrescriprionsContainer({objects}) {
               </tr>
             </thead>
             <tbody className="items">
-              {objects.map((prescription) => (
+              {documents.length === 0 ? (
+  <p className="empty-message">Nu există rețete.</p>
+) : (
+              documents.map((prescription) => (
                 <tr className="item" key={prescription.id}>
                   
               
@@ -45,7 +48,7 @@ export default function PatientPrescriprionsContainer({objects}) {
                   <td className="t-op-nextlvl"><Badge bg={getStatusBadgeVariant(prescription.status)}>{prescription.status} </Badge></td>
                  
                 </tr>
-              ))}
+              )))}
             </tbody>
           </Table> 
                     </div>
