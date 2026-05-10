@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
 import { createConsultation } from "../../services/consultationService";
-import { getUserId } from "../../services/authService";
+import { getProfileId, getUserId } from "../../services/authService";
 
 export default function ConsultationForm({ patients, consultationId, refreshDashboard }) {
   const [formData, setFormData] = useState({
@@ -38,7 +38,7 @@ export default function ConsultationForm({ patients, consultationId, refreshDash
 
     const consultationData = {
   patientId: Number(formData.patientId),
-  doctorId: Number(getUserId()),
+  doctorId: Number(getProfileId()),
   diagnosis: formData.diagnosis,
   notes: formData.notes,
   consultationDate: formData.consultationDate,

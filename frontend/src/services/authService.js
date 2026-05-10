@@ -34,6 +34,10 @@ export function getUserId() {
   return localStorage.getItem("userId");
 }
 
+export function getProfileId() {
+  return localStorage.getItem("profileId");
+}
+
 const API_BASE_URL = "http://localhost:8080/api";
 
 export async function registerPatient(registerData) {
@@ -61,3 +65,25 @@ export function saveAuthData(loginResponse) {
   localStorage.setItem("userId", loginResponse.userId);
   localStorage.setItem("profileId", loginResponse.profileId);
 }
+
+export async function registerDoctor(registerData) {
+  const response = await fetch(`${API_BASE_URL}/doctor-requests/create`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(registerData),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(errorText || "Eroare la depunerea cererii de înregistrare a medicului.");
+  }
+
+  return await response.json();
+}
+
+export const getMyRegistrationRequest = async ({id}) => {
+  const response = await api.get(`/doctor-requests/status/id/${id}`);
+  return response.data;
+};

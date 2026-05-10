@@ -7,6 +7,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardLayout from "./layouts/DashboardLayout";
 import GeneralDashboard from "./layouts/GeneralDashboard";
 import RegisterPatientPage from "./pages/RegisterPatientPage";
+import RegisterDoctorPage from "./pages/RegisterDoctorPage";
+import DoctorRegistrationStatusPage from "./pages/DoctorRegistrationStatusPage";
+import DoctorEnrollmentRequestsPage from "./pages/DoctorEnrollmentRequestsPage";
 
 
 function App() {
@@ -17,6 +20,12 @@ function App() {
         <Route path="/test" element={<GeneralDashboard />} />
         <Route path="/layout" element={<DashboardLayout />} />
         <Route path="/register/patient" element={<RegisterPatientPage />} />
+        <Route path="/register/doctor" element = {<RegisterDoctorPage />}/>
+        <Route
+  path="/doctor-registration-status/:id"
+  element={<DoctorRegistrationStatusPage />}
+/>
+
         <Route
           path="/doctor"
           element={
@@ -42,7 +51,17 @@ function App() {
               <AdminDashboard />
             </ProtectedRoute>
           }
+        
         />
+        <Route
+  path="/doctor/enrollment-requests"
+  element={
+    <ProtectedRoute allowedRole="DOCTOR">
+      <DoctorEnrollmentRequestsPage />
+    </ProtectedRoute>
+  }
+/>
+
       </Routes>
     </BrowserRouter>
     

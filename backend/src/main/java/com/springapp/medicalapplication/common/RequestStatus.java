@@ -1,4 +1,4 @@
-package com.springapp.medicalapplication.model;
+package com.springapp.medicalapplication.common;
 
 
 public enum RequestStatus {

@@ -1,6 +1,6 @@
 package com.springapp.medicalapplication.patient.dto;
 
-import com.springapp.medicalapplication.model.Gender;
+import com.springapp.medicalapplication.common.Gender;
 import java.time.LocalDate;
 
 public class PatientRequestDTO {

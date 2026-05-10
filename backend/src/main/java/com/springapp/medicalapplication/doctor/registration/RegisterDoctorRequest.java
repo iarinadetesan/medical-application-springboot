@@ -1,4 +1,4 @@
-package com.springapp.medicalapplication.dto;
+package com.springapp.medicalapplication.doctor.registration;
 
 public class RegisterDoctorRequest {
     public String username;

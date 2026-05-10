@@ -43,8 +43,13 @@ const [show, setShow] = useState(false);
                      className="view">Vezi tot</Button>
                 </div>
                         
-            
+          {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există consultații.</p> </div>
+) : (  
             <Table responsive className="report-body" striped bordered hover>
+              
+  
             <thead >
               <tr >
                 <th className="t-op ">Data</th>
@@ -54,6 +59,7 @@ const [show, setShow] = useState(false);
               </tr>
             </thead>
             <tbody className="items">
+               
               {objects.map((consultation) => (
                 <tr className="item" key={consultation.id}>
                   
@@ -70,9 +76,11 @@ const [show, setShow] = useState(false);
                     {consultation.notes}
                   </td>
                 </tr>
-              ))}
+              ))};
             </tbody>
-          </Table> 
+             
+          </Table> )
+            }
                     </div>
                 <Modal
         show={show}
@@ -84,11 +92,14 @@ const [show, setShow] = useState(false);
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            Retete medicale
+            Consultații recente
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         
+         {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există consultații medicale. Apăsați butonul „Adaugă” pentru a crea o nouă consultație.</p> </div>
+) : (
           <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -128,7 +139,7 @@ const [show, setShow] = useState(false);
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table>)}
          
       <div className="d-flex gap-2 mt-3">  <Button
   disabled={!selectedItemId}

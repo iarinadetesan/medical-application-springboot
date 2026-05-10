@@ -1,7 +1,6 @@
-package com.springapp.medicalapplication.repository;
+package com.springapp.medicalapplication.doctor.registration;
 
-import com.springapp.medicalapplication.model.DoctorRegistrationRequest;
-import com.springapp.medicalapplication.model.RequestStatus;
+import com.springapp.medicalapplication.common.RequestStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

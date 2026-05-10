@@ -1,6 +1,7 @@
-package com.springapp.medicalapplication.model;
+package com.springapp.medicalapplication.patient.enrollment;
 
 import com.springapp.medicalapplication.doctor.Doctor;
+import com.springapp.medicalapplication.common.RequestStatus;
 import com.springapp.medicalapplication.patient.Patient;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;

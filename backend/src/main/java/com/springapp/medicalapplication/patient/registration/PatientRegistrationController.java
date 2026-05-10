@@ -1,7 +1,5 @@
-package com.springapp.medicalapplication.controller;
+package com.springapp.medicalapplication.patient.registration;
 
-import com.springapp.medicalapplication.dto.RegisterPatientRequest;
-import com.springapp.medicalapplication.service.PatientRegistrationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -2,7 +2,7 @@ package com.springapp.medicalapplication.patient;
 
 import com.springapp.medicalapplication.doctor.Doctor;
 import com.springapp.medicalapplication.consultation.Consultation;
-import com.springapp.medicalapplication.model.Gender;
+import com.springapp.medicalapplication.common.Gender;
 import com.springapp.medicalapplication.prescription.Prescription;
 import com.springapp.medicalapplication.referral.Referral;
 import com.springapp.medicalapplication.user.User;

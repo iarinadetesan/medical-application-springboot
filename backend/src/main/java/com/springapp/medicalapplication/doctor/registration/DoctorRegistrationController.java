@@ -1,8 +1,7 @@
-package com.springapp.medicalapplication.controller;
+package com.springapp.medicalapplication.doctor.registration;
 
-import com.springapp.medicalapplication.dto.*;
-import com.springapp.medicalapplication.model.RequestStatus;
-import com.springapp.medicalapplication.service.DoctorRegistrationService;
+import com.springapp.medicalapplication.admin.ReviewRequestDTO;
+import com.springapp.medicalapplication.common.RequestStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -61,5 +60,11 @@ public class DoctorRegistrationController {
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    // DOCTOR
+    @GetMapping("/status/id/{id}")
+    public ResponseEntity<RequestStatus> getRequestStatusById(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getById(id).status);
     }
 }

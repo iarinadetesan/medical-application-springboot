@@ -1,6 +1,7 @@
-package com.springapp.medicalapplication.model;
+package com.springapp.medicalapplication.doctor.registration;
 
 
+import com.springapp.medicalapplication.common.RequestStatus;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 @Table(name = "doctor_registration_requests",
         uniqueConstraints = {
                 @UniqueConstraint(name="uk_doc_req_email", columnNames = "email"),
-                @UniqueConstraint(name="uk_doc_req_username", columnNames = "email"),
+                @UniqueConstraint(name="uk_doc_req_username", columnNames = "username"),
                 @UniqueConstraint(name="uk_doc_req_license", columnNames = "license_number")
         })
 public class DoctorRegistrationRequest {

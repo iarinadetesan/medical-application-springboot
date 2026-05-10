@@ -1,6 +1,6 @@
-package com.springapp.medicalapplication.dto;
+package com.springapp.medicalapplication.patient.registration;
 
-import com.springapp.medicalapplication.model.Gender;
+import com.springapp.medicalapplication.common.Gender;
 import java.time.LocalDate;
 
 public class RegisterPatientRequest {

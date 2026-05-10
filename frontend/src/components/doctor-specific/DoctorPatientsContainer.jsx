@@ -39,7 +39,10 @@ export default function DoctorPatientsContainer({objects}) {
                      className="view">Vezi tot</Button>
                 </div>
                         
-            
+              {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există pacienți.</p> </div>
+) : (  
             <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -65,7 +68,7 @@ export default function DoctorPatientsContainer({objects}) {
                 </tr>
               ))}
             </tbody>
-          </Table> 
+          </Table> )}
                     </div>
 
         <Modal
@@ -82,6 +85,11 @@ export default function DoctorPatientsContainer({objects}) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există pacienți înscriși. 
+    Pentru a accepta cererea de înscriere a unui pacient, navigați la secțiunea „Pacienți” din meniul din stânga paginii.</p> </div>
+) : (
           <Table striped bordered hover
           
           >
@@ -115,7 +123,7 @@ export default function DoctorPatientsContainer({objects}) {
                 </tr>
               ))}
             </tbody>
-          </Table> 
+          </Table> )}
           <div className="d-flex gap-2 mt-3">
         <Button
   disabled={!selectedPatientId}

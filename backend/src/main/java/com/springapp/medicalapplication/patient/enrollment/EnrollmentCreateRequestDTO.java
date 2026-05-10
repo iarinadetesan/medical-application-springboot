@@ -1,4 +1,4 @@
-package com.springapp.medicalapplication.dto;
+package com.springapp.medicalapplication.patient.enrollment;
 
 public class EnrollmentCreateRequestDTO {
     public Long doctorId;

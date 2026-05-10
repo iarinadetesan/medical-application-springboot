@@ -228,6 +228,8 @@ const handleEnrollmentSubmit = async (event) => {
       </div>
     )}
   </Alert>
+  <Button>Sterge cererea</Button>
+  
       </>
       
     ) : (

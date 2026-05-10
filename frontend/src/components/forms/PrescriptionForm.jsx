@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 
 import { createPrescription } from "../../services/prescriptionService";
-import { getUserId } from "../../services/authService";
+import { getUserId , getProfileId } from "../../services/authService";
 
 export default function PrescriptionForm({ patients, consultationId , refreshDashboard}) {
   const [formData, setFormData] = useState({
@@ -39,7 +39,7 @@ export default function PrescriptionForm({ patients, consultationId , refreshDas
 
     const prescriptionData = {
   patientId: Number(formData.patientId),
-  doctorId: Number(getUserId()),
+  doctorId: Number(getProfileId()),
   consultationId: consultationId || null,
   medicationName: formData.medicationName,
   dosage: formData.dosage,

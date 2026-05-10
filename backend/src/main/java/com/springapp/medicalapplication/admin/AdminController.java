@@ -1,4 +1,4 @@
-package com.springapp.medicalapplication.controller;
+package com.springapp.medicalapplication.admin;
 
 
 

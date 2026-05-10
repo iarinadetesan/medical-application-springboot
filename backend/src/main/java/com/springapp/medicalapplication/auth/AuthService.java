@@ -73,7 +73,8 @@ public class AuthService {
         );
 
 
-        Long profileId = null;
+        Long profileId = profileResolverService.resolveProfileId(user);
+
 
         return new LoginResponse(
                 token,

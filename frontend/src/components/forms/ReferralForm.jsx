@@ -39,7 +39,7 @@ export default function ReferralForm({ patients, consultationId , refreshDashboa
 
     const referralData = {
   patientId: Number(formData.patientId),
-  referringDoctorId: Number(getUserId()),
+  referringDoctorId: Number(getProfileId()),
   specialization: formData.specialization,
   reason: formData.reason,
   issueDate: formData.issueDate,

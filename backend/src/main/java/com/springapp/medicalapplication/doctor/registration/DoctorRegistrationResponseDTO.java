@@ -1,6 +1,6 @@
-package com.springapp.medicalapplication.dto;
+package com.springapp.medicalapplication.doctor.registration;
 
-import com.springapp.medicalapplication.model.RequestStatus;
+import com.springapp.medicalapplication.common.RequestStatus;
 import java.time.LocalDateTime;
 
 public class DoctorRegistrationResponseDTO {

@@ -1,7 +1,6 @@
-package com.springapp.medicalapplication.service;
+package com.springapp.medicalapplication.patient.registration;
 
 import com.springapp.medicalapplication.auth.dto.LoginResponse;
-import com.springapp.medicalapplication.dto.RegisterPatientRequest;
 import com.springapp.medicalapplication.patient.Patient;
 import com.springapp.medicalapplication.user.Role;
 import com.springapp.medicalapplication.user.User;

@@ -1,9 +1,6 @@
-package com.springapp.medicalapplication.controller;
+package com.springapp.medicalapplication.patient.enrollment;
 
-import com.springapp.medicalapplication.dto.EnrollmentCreateRequestDTO;
-import com.springapp.medicalapplication.dto.EnrollmentResponseDTO;
-import com.springapp.medicalapplication.dto.ReviewRequestDTO;
-import com.springapp.medicalapplication.service.EnrollmentService;
+import com.springapp.medicalapplication.admin.ReviewRequestDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;

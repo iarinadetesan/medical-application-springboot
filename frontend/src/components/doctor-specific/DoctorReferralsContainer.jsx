@@ -45,7 +45,10 @@ const [show, setShow] = useState(false);
                      className="view">Vezi tot</Button>
                 </div>
                         
-            
+              {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există trimiteri medicale.</p> </div>
+) : (  
             <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -80,7 +83,7 @@ const [show, setShow] = useState(false);
                 </tr>
               ))}
             </tbody>
-          </Table> 
+          </Table> )}
                     </div>
 
           <Modal
@@ -97,7 +100,10 @@ const [show, setShow] = useState(false);
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         
+         {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există trimiteri medicale. Apăsați butonul „Adaugă” pentru a crea o nouă trimitere.</p> </div>
+) : (
           <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -135,7 +141,7 @@ const [show, setShow] = useState(false);
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table>)}
           
       <div className="d-flex gap-2 mt-3">  <Button
   disabled={!selectedItemId}

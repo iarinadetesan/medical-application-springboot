@@ -41,12 +41,15 @@ export default function DoctorPrescriptionsContainer({ objects = [], patients = 
 <>
         <div className="report-container table-responsive">
                 <div className="report-header">
-                    <h1 className="recent-Articles">Retete medicale recente</h1>
+                    <h1 className="recent-Articles">Rețete medicale recente</h1>
                     <Button onClick={() => handleShow('md-down')}
                      className="view">Vezi tot</Button>
                 </div>
                         
-            
+            {objects.length === 0 ? (
+              <div className="report-body">
+  <p className="empty-message">Nu există rețete.</p> </div>
+) : (
             <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -78,7 +81,7 @@ export default function DoctorPrescriptionsContainer({ objects = [], patients = 
                 </tr>
               ))}
             </tbody>
-          </Table> 
+          </Table> )}
                     </div>
 
             <Modal
@@ -95,7 +98,10 @@ export default function DoctorPrescriptionsContainer({ objects = [], patients = 
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         
+         {objects.length === 0 ? (
+            <div className="report-body" >
+  <p className="empty-message">Nu există rețete medicale. Apăsați butonul „Adaugă” pentru a crea o nouă rețetă.</p> </div>
+) : (
           <Table responsive className="report-body" striped bordered hover>
             <thead >
               <tr >
@@ -135,7 +141,7 @@ export default function DoctorPrescriptionsContainer({ objects = [], patients = 
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table> )}
           <div className="d-flex gap-2 mt-3">
         <Button
   disabled={!selectedItemId}

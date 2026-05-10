@@ -1,8 +1,8 @@
 import '../styles/NavigationSidebar.css'
 import { useState } from 'react'
 
-import { useNavigate } from "react-router-dom";
-import { logout } from "../services/authService";
+import { useLocation , useNavigate } from "react-router-dom";
+import { logout , getRole} from "../services/authService";
 
 
 import HomeIcon from '@mui/icons-material/Home';
@@ -17,11 +17,42 @@ import GroupsIcon from '@mui/icons-material/Groups';
 function NavigationSidebar({navIsClosed}) {
     
 const navigate = useNavigate();
+const location = useLocation();
+
+const role = getRole();
+
+function getOptionClass(path) {
+  return `sidebar-nav-option ${
+    location.pathname === path
+      ? "option1"
+      : ""
+  }`;
+}
 
 function handleLogout() {
   logout();
   navigate("/");
 }
+
+function handlePatientsClick() {
+  navigate("/doctor/enrollment-requests");
+}
+
+function handleMedicalHistoryClick() {
+  navigate ("/patient");
+}
+function handleDashboardClick() {
+  if (role === "DOCTOR") {
+    navigate("/doctor");
+  } else if (role === "PATIENT") {
+    navigate("/patient");
+  } else if (role === "ADMIN") {
+    navigate("/admin");
+  }
+}
+
+
+
 
 
   return (
@@ -29,17 +60,38 @@ function handleLogout() {
       <div className="sidebar-nav">
       <div className="sidebar-nav-upper-options">
          
-        <div className="sidebar-nav-option option1">
-          <h3>
-  <HomeIcon  />
-  <span className="sidebar-nav-text">Dashboard</span>
-      </h3>
-        </div>
+        <div 
+        className={getOptionClass(role === "DOCTOR" ? "/doctor" : "/patient")}
+        
+        onClick={handleDashboardClick}>
+  <h3>
+    <HomeIcon />
+    <span className="sidebar-nav-text">Dashboard</span>
+  </h3>
+</div>
 
-        <div className="sidebar-nav-option">
-        <h3>  <GroupsIcon/>
-          <span className="sidebar-nav-text">Pacienți</span></h3>
-        </div>
+{role === "DOCTOR" && (
+  <div 
+  className={getOptionClass("/doctor/enrollment-requests")}
+   onClick={handlePatientsClick}>
+    <h3>
+      <GroupsIcon />
+      <span className="sidebar-nav-text">Pacienți</span>
+    </h3>
+  </div>
+)}
+
+{role === "PATIENT" && (
+  <div 
+  className={getOptionClass("/patient/medical-history")} 
+  onClick={handleMedicalHistoryClick}>
+    <h3>
+      <MedicalInformationIcon />
+      <span className="sidebar-nav-text">Istoric Medical</span>
+    </h3>
+  </div>
+)}
+
 
 </div>
     <div className="sidebar-nav-lower-options">

@@ -1,14 +1,13 @@
-package com.springapp.medicalapplication.service;
+package com.springapp.medicalapplication.doctor.registration;
+import com.springapp.medicalapplication.common.RequestStatus;
 import com.springapp.medicalapplication.doctor.Doctor;
 import com.springapp.medicalapplication.doctor.DoctorRepository;
-import com.springapp.medicalapplication.dto.*;
-import com.springapp.medicalapplication.model.*;
 import com.springapp.medicalapplication.notification.EmailService;
-import com.springapp.medicalapplication.repository.*;
 import com.springapp.medicalapplication.user.Role;
 import com.springapp.medicalapplication.user.User;
 import com.springapp.medicalapplication.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,16 +58,30 @@ public class DoctorRegistrationService {
         r.setCabinetAddress(req.cabinetAddress);
         r.setStatus(RequestStatus.PENDING);
 
+        DoctorRegistrationRequest savedRequest = reqRepo.save(r);
 
-       emailService.send(
-                "aplicatie.medicala.info@gmail.com",
-                "Cerere nouă de înregistrare medic",
-                "A fost creată o cerere nouă pentru medic: " + r.getFirstName() + " " + r.getLastName()
-                        + "\nEmail: " + r.getEmail()
-                        + "\nLicense: " + r.getLicenseNumber()
+        String statusLink = "http://localhost:5173/doctor-registration-status/" + savedRequest.getId();
+
+        emailService.send(
+                savedRequest.getEmail(),
+                "Cererea ta de inregistrare a fost trimisa",
+                "Salut, " + savedRequest.getFirstName() + "!\n\n"
+                        + "Cererea ta de inregistrare ca medic a fost trimisa cu succes.\n\n"
+                        + "Pentru a accesa statusul cererii, puteti accesa pagina aceasta:\n"
+                        + statusLink
         );
 
-        return toDto(reqRepo.save(r));
+        emailService.send(
+                "aplicatie.medicala.info@gmail.com",
+                "Cerere noua de inregistrare medic",
+                "A fost creata o cerere noua pentru medic: "
+                        + savedRequest.getFirstName() + " " + savedRequest.getLastName()
+                        + "\nEmail: " + savedRequest.getEmail()
+                        + "\nLicense: " + savedRequest.getLicenseNumber()
+        );
+
+        return toDto(savedRequest);
+
 
         
 
@@ -160,4 +173,6 @@ public class DoctorRegistrationService {
         dto.reviewReason = r.getReviewReason();
         return dto;
     }
+
+
 }

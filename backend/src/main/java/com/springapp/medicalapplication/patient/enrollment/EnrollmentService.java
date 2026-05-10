@@ -1,14 +1,11 @@
-package com.springapp.medicalapplication.service;
+package com.springapp.medicalapplication.patient.enrollment;
 
+import com.springapp.medicalapplication.common.RequestStatus;
 import com.springapp.medicalapplication.doctor.Doctor;
 import com.springapp.medicalapplication.doctor.DoctorRepository;
-import com.springapp.medicalapplication.dto.EnrollmentCreateRequestDTO;
-import com.springapp.medicalapplication.dto.EnrollmentResponseDTO;
-import com.springapp.medicalapplication.model.*;
 import com.springapp.medicalapplication.notification.EmailService;
 import com.springapp.medicalapplication.patient.Patient;
 import com.springapp.medicalapplication.patient.PatientRepository;
-import com.springapp.medicalapplication.repository.*;
 import com.springapp.medicalapplication.user.Role;
 import com.springapp.medicalapplication.user.User;
 import com.springapp.medicalapplication.user.UserRepository;
@@ -145,13 +142,30 @@ public class EnrollmentService {
 
     private EnrollmentResponseDTO toDto(EnrollmentRequest er) {
         EnrollmentResponseDTO dto = new EnrollmentResponseDTO();
+
+        Patient patient = er.getPatient();
+
         dto.id = er.getId();
-        dto.patientId = er.getPatient().getId();
+        dto.patientId = patient.getId();
         dto.doctorId = er.getDoctor().getId();
+
+        dto.patientFirstName = patient.getFirstName();
+        dto.patientLastName = patient.getLastName();
+        dto.patientFullName = patient.getFullName();
+
+        if (patient.getUser() != null) {
+            dto.patientEmail = patient.getUser().getEmail();
+        }
+
+        dto.patientPhone = patient.getPhone();
+        dto.patientAddress = patient.getAddress();
+
         dto.status = er.getStatus();
         dto.createdAt = er.getCreatedAt();
         dto.reviewedAt = er.getReviewedAt();
         dto.reviewReason = er.getReviewReason();
+
         return dto;
     }
+
 }
